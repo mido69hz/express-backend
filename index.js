@@ -1,9 +1,9 @@
 import express from "express";
 import todoRouter from "./todo-router.js";
 import authRouter from "./auth-router.js";
-import cors from "cors";
 
-app.use(cors());
+
+
 const PORT = 3333;
 const app = express();
 app.use(express.json());
