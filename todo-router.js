@@ -35,28 +35,18 @@ router.get("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-
   if (!id) return res.status(400).send({ message: "Id not found!" });
-
-  const todoIndex = todos.findIndex((item) => item.id === Number(id));
-  if (todoIndex === -1) {
-    return res.status(404).send({ message: "Todo not found!" });
-  }
-  todos.splice(todoIndex, 1);
+  const index = todos.findIndex((todo) => todo.id === Number(id));
+  if (index === -1) return res.status(404).send({ message: "Todo not found!" });
+  todos.splice(index, 1);
   fs.writeFileSync("./data.json", JSON.stringify(todos), "utf-8");
-  return res.send({ message: "Todo deleted successfully!" });
+  return res.send({ id });
 });
 
 router.put("/:id", (req, res) => {
-  const updatedData = req.body;
-  console.log(updatedData);
+  const id = req.params.id;
   if (!id) return res.status(400).send({ message: "Id not found!" });
-  const todoIndex = todos.find((item) => item.id === Number(id));
-  if (todoIndex === -1) {
-    return res.status(404).send({ message: "Todo not found!" });
-  }
-
-  fs.writeFileSync("./data.json", JSON.stringify(todos), "utf-8");
-  return res.send({ message: "Todo updated!!!" });
+  // TODO update functions
 });
+
 export default router;
